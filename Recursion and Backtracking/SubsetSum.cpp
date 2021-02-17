@@ -8,10 +8,35 @@ using namespace std;
 
 
 
+void generateSubset(int arr[], int n, vector<int> vc, int sum)
+{
+    if (sum == 0)
+    {
+        for (int x : vc)
+            cout << x << " ";
+        cout << endl;
+        return;
+    }
+    if (n == 0)
+        return;
+    generateSubset(arr, n - 1, vc, sum);
+    if (sum - arr[n - 1] >= 0)
+    {
+        vc.push_back(arr[n - 1]);
+        generateSubset(arr, n - 1, vc, sum - arr[n - 1]);
+    }
+}
+
 
 void striker()
 {
-    // https://www.geeksforgeeks.org/subset-sum-backtracking-4/
+    int n, targetSum;
+    cin >> n >> targetSum;
+    int arr[n];
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+    vector<int> vc;
+    generateSubset(arr, n, vc, targetSum);
 }
 
 
